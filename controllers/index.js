@@ -1,6 +1,23 @@
 function signin(req, res) {
 
     let User = require('../models/user');
+
+	User.findOne({username: req.body.account}, function(err, user) {
+		if (err)
+			throw err;
+
+		if (user.comparePassword(req.body.password)) {
+
+			res.redirect('/profile');
+		}
+		else
+			res.redirect('/');
+	});
+}
+
+function signup(req, res) {
+
+    let User = require('../models/user');
 	let user = new User();
 
 	user.username = req.body.account;
@@ -14,13 +31,6 @@ function signin(req, res) {
 		res.redirect('/');
 
 	});
-
-}
-
-function signup(req, res) {
-
-    res.send("Signup");
-
 }
 
 function signout(req, res) {
