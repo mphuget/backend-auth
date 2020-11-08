@@ -9,6 +9,9 @@ app.get("/about", (req, res) => {
   res.send("About");
 })
 
+let routes = require("./routes");
+
+app.use(routes);
 
 app.listen(4000);
 console.log('App server running on port 4000');
