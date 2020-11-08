@@ -1,2 +1,1 @@
-The simplest server ever
-Accepts everything from client and always sending back Express response
+Two URLs are available: / and /about
