@@ -1,27 +1,28 @@
 let router = require('express').Router();
+let controller = require("../controllers");
 
 router.post('/signin', function(req, res) {
 
-  res.send("/signin");
+  controller.signin(req, res);
 
 });
 
 
 router.post('/signout', function(req, res) {
 
-  res.send("/signout");
+    controller.signout(req, res);
 
 });
 
 router.post('/signup', function(req, res) {
 
-	res.send("/signup");
+	controller.signup(req, res);
 
 });
 
 router.get('/profile', function(req, res) {
 
-	res.send("/profile");
+	controller.profile(req, res);
 
 });
 
