@@ -35,7 +35,7 @@ function signup(req, res) {
 
 function signout(req, res) {
 
-    res.send("Signout");
+    res.redirect("/");
 
 }
 
