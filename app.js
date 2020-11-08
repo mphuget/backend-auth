@@ -12,12 +12,18 @@ let path = require('path');
 //to access the database stored in MongoDB
 let mongoose = require('mongoose');
 
+//session allows to store data such as user data
+let session = require('express-session');
+
+//sessions are stored into MongoDB
+let MongoStore = require('connect-mongo')(session);
+
 let cors = require('cors');
 
 const app = express();
 
 //connects to the MongoDB database
-mongoose.connect('mongodb://localhost:27017/auth', (err)=> {
+mongoose.connect('mongodb://localhost:27017/auth', { useNewUrlParser: true, useUnifiedTopology: true }, (err)=> {
 
   if (err) {
 
@@ -31,6 +37,16 @@ mongoose.connect('mongodb://localhost:27017/auth', (err)=> {
   }
 
 });
+
+//setting session
+app.use(session({
+
+  resave: true,
+  saveUninitialized: true,
+  secret: 'mySecretKey',
+  store: new MongoStore({ url: 'mongodb://localhost:27017/auth', autoReconnect: true})
+
+}));
 
 //compress response body for better performance
 app.use(compression());
