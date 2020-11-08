@@ -1,3 +1,9 @@
+const jwt = require('jsonwebtoken');
+
+function createToken(user) {
+    return jwt.sign({id: user.id, username: user.username}, "My so secret sentence");
+}
+
 function signin(req, res) {
 
     let User = require('../models/user');
@@ -9,7 +15,7 @@ function signin(req, res) {
 		if (user.comparePassword(req.body.password)) {
             req.session.username = req.body.account;
 			req.session.logged = true;
-			res.redirect('/profile');
+			res.status(200).json({token: createToken(user)});
 		}
 		else
 			res.redirect('/');

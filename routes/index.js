@@ -1,5 +1,6 @@
 let router = require('express').Router();
 let controller = require("../controllers");
+const passport = require("passport");
 
 router.post('/signin', function(req, res) {
 
@@ -20,7 +21,7 @@ router.post('/signup', function(req, res) {
 
 });
 
-router.get('/profile', function(req, res) {
+router.get('/profile', passport.authenticate('jwt', { session: false }), function(req, res) {
 
 	controller.profile(req, res);
 
