@@ -1,6 +1,19 @@
 function signin(req, res) {
 
-    res.send("Signin");
+    let User = require('../models/user');
+	let user = new User();
+
+	user.username = req.body.account;
+	user.password = req.body.password;
+
+	user.save((err, savedUser) => {
+
+		if (err)
+			throw err;
+
+		res.redirect('/');
+
+	});
 
 }
 
@@ -19,7 +32,7 @@ function signout(req, res) {
 function profile(req, res) {
 
     res.send("Profile");
-    
+
 }
 
 module.exports.signin = signin;
