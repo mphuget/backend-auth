@@ -36,13 +36,18 @@ function signup(req, res) {
 
 function signout(req, res) {
 
+    req.session.username = "";
+	req.session.logged = false;
     res.redirect("/");
 
 }
 
 function profile(req, res) {
 
-    res.send("Profile");
+    if (req.session.logged)
+        res.send("Profile");
+    else
+        res.redirect('/');
 
 }
 
