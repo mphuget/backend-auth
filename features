@@ -1,0 +1,2 @@
+The simplest server ever
+Accepts everything from client and always sending back Express response
